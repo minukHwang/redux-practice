@@ -1,24 +1,25 @@
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Container, Button } from 'react-bootstrap';
 
 function App() {
+  const count = useSelector(state=>state.count)
+  const dispatch = useDispatch()
+  const numberUP = () => {
+    dispatch({type:"INCREMENT", payload:{num:5}})
+  }
+  const numberDown = () => {
+    dispatch({type:"DECREMENT"})
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <div>{count}</div>
+      <Button variant="primary" onClick={numberUP}>Plus</Button>
+      <Button variant='primary' onClick={numberDown}>Minus</Button>
+    </Container>
   );
 }
 
